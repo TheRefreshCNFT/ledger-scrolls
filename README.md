@@ -1,6 +1,14 @@
 
 # Ledger Scrolls 📜
-https://beacnpool.github.io/ledger-scrolls/ - web viewer
+
+## 🌐 GitHub Pages
+- Main viewer: https://beacnpool.github.io/ledger-scrolls/
+- Constitution viewer: https://beacnpool.github.io/ledger-scrolls/constitution.html
+- Bible viewer: https://beacnpool.github.io/ledger-scrolls/bible.html
+- First video viewer: https://beacnpool.github.io/ledger-scrolls/first-video.html
+- Latest viewer shortcut: https://beacnpool.github.io/ledger-scrolls/latest.html
+- Preview testnet PoC: https://beacnpool.github.io/ledger-scrolls/preview.html
+
 **"A library that cannot burn."**
 
 Ledger Scrolls is an open-source **standard + viewer** for publishing and reading **permissionless, immutable data** on the [Cardano](https://cardano.org/) blockchain.
