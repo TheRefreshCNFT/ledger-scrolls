@@ -88,7 +88,7 @@ function renderScrollBytesIntoViewer({ bytes, contentType, filename }, viewerCon
         const text = new TextDecoder("utf-8", { fatal: false }).decode(u8);
         if (ct.includes("text/html")) {
             const iframe = document.createElement("iframe");
-            iframe.setAttribute("sandbox", "allow-same-origin");
+            iframe.setAttribute("sandbox", "allow-scripts");
             iframe.style.width = "100%";
             iframe.style.height = "60vh";
             iframe.style.border = "0";
@@ -552,14 +552,9 @@ class LedgerScrollsApp {
     _renderScrollList(scrolls) {
         if (!scrolls || scrolls.length === 0) {
             this.elements.scrollGrid.innerHTML = `
-                <div class="scroll-item" style="grid-column: 1 / -1; cursor: default;">
-                    <div class="scroll-item-icon">📚</div>
-                    <div class="scroll-item-info">
-                        <div class="scroll-item-title">Library not loaded yet</div>
-                        <div class="scroll-item-meta">
-                            <span>Open Settings → Confirm & Load Library</span>
-                        </div>
-                    </div>
+                <div class="empty-state">
+                    <div class="empty-state-icon">📜</div>
+                    <div class="empty-state-text">No scrolls found. Try a different search or load the registry from Settings.</div>
                 </div>
             `;
             return;
@@ -954,15 +949,18 @@ class LedgerScrollsApp {
         const toast = document.createElement('div');
         toast.className = `toast ${type}`;
         const icons = { success: '✅', error: '❌', warning: '⚠️', info: 'ℹ️' };
+        const dismiss = () => {
+            toast.classList.add('toast-exit');
+            setTimeout(() => toast.remove(), 300);
+        };
         toast.innerHTML = `
             <span class="toast-icon">${icons[type] || 'ℹ️'}</span>
             <span class="toast-message">${this._escapeHtml(message)}</span>
+            <button class="toast-close" aria-label="Dismiss">&times;</button>
         `;
+        toast.querySelector('.toast-close').addEventListener('click', dismiss);
         this.elements.toastContainer.appendChild(toast);
-        setTimeout(() => {
-            toast.classList.add('toast-exit');
-            setTimeout(() => toast.remove(), 300);
-        }, 4000);
+        setTimeout(dismiss, 4000);
     }
 
     // =========================================================================

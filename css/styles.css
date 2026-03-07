@@ -1505,15 +1505,166 @@ body {
     .app-container {
         max-width: 900px;
     }
-    
+
     .bottom-nav {
         max-width: 400px;
         left: 50%;
         transform: translateX(-50%);
         border-radius: var(--radius-lg) var(--radius-lg) 0 0;
     }
-    
+
     .drawer-content {
         max-width: 700px;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Accessibility: Focus-visible styles
+   -------------------------------------------------------------------------- */
+*:focus-visible {
+    outline: 2px solid var(--color-accent-primary);
+    outline-offset: 2px;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid var(--color-accent-primary);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px var(--color-accent-glow);
+}
+
+/* --------------------------------------------------------------------------
+   Desktop: Hover States
+   -------------------------------------------------------------------------- */
+@media (hover: hover) and (pointer: fine) {
+    .scroll-item:hover {
+        background: var(--color-bg-tertiary);
+        border-color: var(--color-accent-primary);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .category-chip:hover {
+        background: var(--color-bg-elevated);
+        color: var(--color-text-primary);
+    }
+
+    .nav-btn-secondary:hover {
+        background: var(--color-bg-elevated);
+        color: var(--color-text-primary);
+    }
+
+    .nav-btn-primary:hover {
+        box-shadow: 0 6px 28px var(--color-accent-glow);
+        transform: translateY(-1px);
+    }
+
+    .btn-back:hover {
+        background: var(--color-bg-elevated);
+    }
+
+    .btn-icon:hover:not(:disabled) {
+        background: var(--color-bg-elevated);
+        transform: scale(1.05);
+    }
+
+    .btn:hover:not(:disabled) {
+        border-color: var(--color-accent-primary);
+    }
+
+    .btn-outline:hover:not(:disabled) {
+        background: var(--color-bg-tertiary);
+        border-color: var(--color-accent-primary);
+        color: var(--color-accent-primary);
+    }
+
+    .theme-pill:hover {
+        background: var(--color-bg-tertiary);
+        color: var(--color-text-primary);
+    }
+
+    .metadata-toggle:hover {
+        background: var(--color-bg-elevated);
+    }
+
+    .connection-pill:hover {
+        background: var(--color-bg-elevated);
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Toast: Dismissible with close button
+   -------------------------------------------------------------------------- */
+.toast-close {
+    background: none;
+    border: none;
+    color: var(--color-text-muted);
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0 0 0 var(--space-sm);
+    flex-shrink: 0;
+    line-height: 1;
+    opacity: 0.6;
+    transition: opacity var(--transition-fast);
+}
+
+.toast-close:hover {
+    opacity: 1;
+    color: var(--color-text-primary);
+}
+
+/* --------------------------------------------------------------------------
+   Drawer: Entrance polish
+   -------------------------------------------------------------------------- */
+.drawer.active .drawer-backdrop {
+    animation: fade-in 0.2s ease forwards;
+}
+
+/* --------------------------------------------------------------------------
+   Empty State illustration
+   -------------------------------------------------------------------------- */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-xl) var(--space-md);
+    text-align: center;
+    color: var(--color-text-muted);
+}
+
+.empty-state-icon {
+    font-size: 3rem;
+    margin-bottom: var(--space-md);
+    opacity: 0.5;
+}
+
+.empty-state-text {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-style: italic;
+}
+
+/* --------------------------------------------------------------------------
+   Scroll item transition polish
+   -------------------------------------------------------------------------- */
+.scroll-item {
+    transition: all var(--transition-base);
+}
+
+/* --------------------------------------------------------------------------
+   Reduced motion: respect prefers-reduced-motion
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .particle {
+        display: none;
     }
 }

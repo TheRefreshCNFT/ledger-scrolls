@@ -251,10 +251,14 @@ const SCROLLS = [
  * Registry Configuration
  */
 const REGISTRY = {
+    // Legacy registry (older v2 docs). Kept for compatibility.
     address: 'addr1q9x84f458uyf3k23sr7qfalg3mw2hl0nvv4navps2r7vq69esnxrheg9tfpr8sdyfzpr8jch5p538xjynz78lql9wm6qpl6qxy',
     policy_id: '895cbbe0e284b60660ed681e389329483d5ca94677cbb583f3124062',
     asset_hex: '4c535f5245474953545259',
-    asset_name: 'LS_REGISTRY'
+    asset_name: 'LS_REGISTRY',
+
+    // New forkable registry (Head → List) default trust anchor (BEACN public).
+    public_head_txin: 'a9c56fb3d4d8b526fe7a0aa7c2416615154af30c2c09ce747a899a886ba8bad9#0'
 };
 
 /**

@@ -324,23 +324,14 @@ class ScrollReconstructor {
             }
         }
 
-        // Koios datum_info style objects
+        // Koios datum_info style objects and already-parsed dicts
         if (typeof datum === 'object' && datum !== null) {
             if (datum.bytes) return datum.bytes;
             if (datum.value?.fields?.[0]?.bytes) return datum.value.fields[0].bytes;
             if (datum.value?.bytes) return datum.value.bytes;
-        }
-        
-        // If it's already parsed (dict with fields)
-        if (typeof datum === 'object') {
-            if (datum.bytes) {
-                return datum.bytes;
-            }
             if (datum.fields && Array.isArray(datum.fields)) {
                 const bytesField = datum.fields[0]?.bytes;
-                if (bytesField) {
-                    return bytesField;
-                }
+                if (bytesField) return bytesField;
             }
         }
         
@@ -420,8 +411,4 @@ class ScrollReconstructor {
 }
 
 // Export for use in other modules
-window.ScrollReconstructor = ScrollReconstructor;
-console.log('ScrollReconstructor loaded');
-
-// Ensure global access when loaded via plain script tag
 window.ScrollReconstructor = ScrollReconstructor;

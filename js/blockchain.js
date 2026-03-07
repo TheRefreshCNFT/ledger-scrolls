@@ -15,9 +15,7 @@ class BlockchainClient {
         this.baseUrl = this._getBaseUrl();
         this.koiosBaseUrls = [
             'https://api.koios.rest/api/v1',
-            'https://koios.beacnpool.org/api/v1',
-            'https://corsproxy.io/?https://api.koios.rest/api/v1',
-            'https://cors.isomorphic-git.org/https://api.koios.rest/api/v1'
+            'https://koios.beacnpool.org/api/v1'
         ];
         this.rateLimitDelay = 100; // ms between requests
         this.lastRequest = 0;

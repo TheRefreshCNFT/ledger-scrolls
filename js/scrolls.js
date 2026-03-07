@@ -210,6 +210,7 @@ let SCROLLS = [
             sha256: 'aebd63a8cdeb7aeb0a64733ab3ecd4d98557b4b337a0af60dbc1f59c7de65814'
         },
         metadata: {
+            size: '~2.7MB',
             pages: 175,
             minted_by: 'BEACNpool',
             policy_id: '38fbd56d7de6eb9df88599b5b102304df4c817aee53e4fb9c59cbed2',

@@ -40,13 +40,13 @@
         <main class="viewer-area">
             <!-- Scroll Title Bar (when viewing) -->
             <div class="scroll-title-bar" id="scrollTitleBar">
-                <button class="btn-back" id="backBtn">
+                <button class="btn-back" id="backBtn" aria-label="Go back">
                     <span>←</span>
                 </button>
                 <h2 id="viewerTitle">Select a Scroll</h2>
                 <div class="title-actions">
-                    <button class="btn-icon" id="downloadBtn" title="Download" disabled>💾</button>
-                    <button class="btn-icon" id="verifyBtn" title="Verify" disabled>🔐</button>
+                    <button class="btn-icon" id="downloadBtn" title="Download" aria-label="Download scroll" disabled>💾</button>
+                    <button class="btn-icon" id="verifyBtn" title="Verify" aria-label="Verify integrity" disabled>🔐</button>
                 </div>
             </div>
 
@@ -100,14 +100,14 @@
 
         <!-- Bottom Navigation -->
         <nav class="bottom-nav">
-            <button class="nav-btn nav-btn-secondary" id="aboutBtn" title="About">
+            <button class="nav-btn nav-btn-secondary" id="aboutBtn" title="About" aria-label="About Ledger Scrolls">
                 <span class="nav-icon">ℹ️</span>
             </button>
             <button class="nav-btn nav-btn-primary" id="libraryBtn">
                 <span class="nav-icon">📚</span>
                 <span class="nav-label">The Library</span>
             </button>
-            <button class="nav-btn nav-btn-secondary" id="settingsBtn" title="Settings">
+            <button class="nav-btn nav-btn-secondary" id="settingsBtn" title="Settings" aria-label="Open settings">
                 <span class="nav-icon">⚙️</span>
             </button>
         </nav>
@@ -119,12 +119,12 @@
         <div class="drawer-content">
             <div class="drawer-header">
                 <h3>📚 The Library</h3>
-                <button class="btn-icon drawer-close" data-close="libraryDrawer">✕</button>
+                <button class="btn-icon drawer-close" data-close="libraryDrawer" aria-label="Close library">✕</button>
             </div>
             <div class="drawer-body">
                 <!-- Search -->
                 <div class="search-box">
-                    <input type="text" class="search-input" id="searchScrolls" placeholder="Search scrolls...">
+                    <input type="text" class="search-input" id="searchScrolls" placeholder="Search scrolls..." aria-label="Search scrolls">
                 </div>
                 
                 <!-- Categories -->
@@ -151,7 +151,7 @@
         <div class="drawer-content">
             <div class="drawer-header">
                 <h3>⚙️ Settings</h3>
-                <button class="btn-icon drawer-close" data-close="settingsDrawer">✕</button>
+                <button class="btn-icon drawer-close" data-close="settingsDrawer" aria-label="Close settings">✕</button>
             </div>
             <div class="drawer-body">
                 <!-- Connection (Koios-only) -->
@@ -215,7 +215,7 @@
         <div class="drawer-content">
             <div class="drawer-header">
                 <h3>📜 About</h3>
-                <button class="btn-icon drawer-close" data-close="aboutDrawer">✕</button>
+                <button class="btn-icon drawer-close" data-close="aboutDrawer" aria-label="Close about">✕</button>
             </div>
             <div class="drawer-body">
                 <div class="about-hero">
@@ -273,7 +273,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h3>🔧 Load Custom Scroll</h3>
-                <button class="btn-icon modal-close" data-close="customScrollModal">✕</button>
+                <button class="btn-icon modal-close" data-close="customScrollModal" aria-label="Close">✕</button>
             </div>
             <div class="modal-body">
                 <div class="tabs">
@@ -352,7 +352,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h3>🔐 Verification</h3>
-                <button class="btn-icon modal-close" data-close="verifyModal">✕</button>
+                <button class="btn-icon modal-close" data-close="verifyModal" aria-label="Close">✕</button>
             </div>
             <div class="modal-body">
                 <div class="verification-result" id="verificationResult">

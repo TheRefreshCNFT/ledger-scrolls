@@ -53,7 +53,7 @@ This configuration:
 - **Prevents** popup windows
 - **Prevents** navigation that could escape the sandbox
 
-> **Note:** The `allow-scripts` without `allow-same-origin` creates a unique origin for the iframe, isolating it from the parent page's data including stored API keys.
+> **Important:** Never use `allow-same-origin` with `allow-scripts` — that combination allows sandboxed scripts to escape the sandbox and access the parent page's data (including stored API keys). The `allow-scripts` *without* `allow-same-origin` creates a unique opaque origin for the iframe, fully isolating it.
 
 ### Hash Verification
 
