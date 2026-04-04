@@ -4,7 +4,7 @@ import { ScrollReconstructor } from '../utils/reconstruct.js';
 import { getAllScrolls } from '../utils/scrolls.js';
 
 export function useBlockchain() {
-  const [client] = useState(() => new BlockchainClient('koios'));
+  const [client] = useState(() => new BlockchainClient('koios', null, 'https://koios.beacn.workers.dev'));
   const [reconstructor] = useState(() => new ScrollReconstructor(client));
   
   const [library, setLibrary] = useState([]);
