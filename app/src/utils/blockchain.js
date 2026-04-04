@@ -5,7 +5,7 @@ export class BlockchainClient {
     constructor(mode = 'koios', apiKey = null, koiosProxy = '') {
         this.mode = mode;
         this.apiKey = apiKey;
-        this.koiosProxy = koiosProxy;
+        this.koiosProxy = this._normalizeKoiosProxy(koiosProxy);
         this.baseUrl = this._getBaseUrl();
         this.koiosBaseUrls = [
             'https://api.koios.rest/api/v1'
@@ -36,8 +36,15 @@ export class BlockchainClient {
         this.baseUrl = this._getBaseUrl();
     }
 
+    _normalizeKoiosProxy(proxy) {
+        if (!proxy) return '';
+        const trimmed = String(proxy).trim().replace(/\/+$/, '');
+        if (!trimmed) return '';
+        return trimmed.replace(/\/api(?:\/v1)?$/i, '');
+    }
+
     setKoiosProxy(proxy) {
-        this.koiosProxy = proxy || '';
+        this.koiosProxy = this._normalizeKoiosProxy(proxy);
     }
 
     async _rateLimitedFetch(url, options = {}, retries = 0) {
@@ -89,9 +96,8 @@ export class BlockchainClient {
         const errors = [];
         const bases = [...this.koiosBaseUrls];
         if (this.koiosProxy) {
-            const trimmed = this.koiosProxy.replace(/\/$/, '');
-            const withApi = trimmed.includes('/api') ? trimmed : `${trimmed}/api/v1`;
-            if (!bases.includes(trimmed)) bases.unshift(trimmed);
+            const normalized = this._normalizeKoiosProxy(this.koiosProxy);
+            const withApi = `${normalized}/api/v1`;
             if (!bases.includes(withApi)) bases.unshift(withApi);
         }
 
