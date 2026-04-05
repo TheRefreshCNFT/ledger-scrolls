@@ -2,14 +2,19 @@ import { useState, useMemo, useCallback, useEffect } from 'react';
 import { BlockchainClient } from '../utils/blockchain.js';
 import { ScrollReconstructor } from '../utils/reconstruct.js';
 import { getAllScrolls } from '../utils/scrolls.js';
+import { RegistryResolver } from '../utils/registry.js';
 
 export function useBlockchain() {
   const [client] = useState(() => new BlockchainClient('koios', null, 'https://koios.beacn.workers.dev'));
   const [reconstructor] = useState(() => new ScrollReconstructor(client));
-  
+  const [resolver] = useState(() => new RegistryResolver());
+
   const [library, setLibrary] = useState([]);
   const [loadingList, setLoadingList] = useState(false);
   const [isOnline, setIsOnline] = useState(false);
+  const [registryLoading, setRegistryLoading] = useState(false);
+  const [registryError, setRegistryError] = useState(null);
+  const [registryCount, setRegistryCount] = useState(0);
   
   const [loadingScroll, setLoadingScroll] = useState(false);
   const [scrollData, setScrollData] = useState(null);
@@ -17,14 +22,27 @@ export function useBlockchain() {
   const [scrollError, setScrollError] = useState(null);
 
   useEffect(() => {
-    setLibrary(getAllScrolls());
-    
-    // Test connection
+    const hardcoded = getAllScrolls();
+    setLibrary(hardcoded);
+
+    // Test connection and resolve registry in parallel
     client.testConnection().then(res => {
       setIsOnline(res.success);
     }).catch(() => setIsOnline(false));
 
-  }, [client]);
+    setRegistryLoading(true);
+    setRegistryError(null);
+    resolver.resolve(client).then(discovered => {
+      const merged = resolver.mergeScrolls(discovered, hardcoded);
+      setLibrary(merged);
+      setRegistryCount(discovered.length);
+      setRegistryLoading(false);
+    }).catch(e => {
+      setRegistryError(e.message || String(e));
+      setRegistryLoading(false);
+    });
+
+  }, [client, resolver]);
 
   useEffect(() => {
     reconstructor.setProgressCallback((msg, pct) => {
@@ -76,6 +94,9 @@ export function useBlockchain() {
     library,
     loadingList,
     isOnline,
+    registryLoading,
+    registryError,
+    registryCount,
     loadScroll,
     cancelLoading,
     loadingScroll,

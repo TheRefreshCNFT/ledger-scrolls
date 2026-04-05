@@ -17,7 +17,10 @@ function App() {
     scrollData,
     scrollProgress,
     scrollError,
-    isOnline
+    isOnline,
+    registryLoading,
+    registryError,
+    registryCount
   } = useBlockchain();
 
   const handleOpenDrawer = (drawerName) => {
@@ -54,11 +57,14 @@ function App() {
 
       <BottomNav onOpenDrawer={handleOpenDrawer} />
 
-      <Drawers 
-        activeDrawer={activeDrawer} 
-        onClose={handleCloseDrawer} 
+      <Drawers
+        activeDrawer={activeDrawer}
+        onClose={handleCloseDrawer}
         library={library}
         onSelectScroll={handleSelectScroll}
+        registryLoading={registryLoading}
+        registryError={registryError}
+        registryCount={registryCount}
       />
     </div>
   );

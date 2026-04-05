@@ -3,7 +3,7 @@ import { X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import LibraryDrawer from './LibraryDrawer';
 
-export default function Drawers({ activeDrawer, onClose, library, onSelectScroll }) {
+export default function Drawers({ activeDrawer, onClose, library, onSelectScroll, registryLoading, registryError, registryCount }) {
   if (!activeDrawer) return null;
 
   const getTitle = () => {
@@ -48,7 +48,13 @@ export default function Drawers({ activeDrawer, onClose, library, onSelectScroll
           
           <div className="flex-1 overflow-y-auto p-4 flex flex-col text-[var(--text-primary)]">
             {activeDrawer === 'library' && (
-              <LibraryDrawer library={library} onSelect={onSelectScroll} />
+              <LibraryDrawer
+                library={library}
+                onSelect={onSelectScroll}
+                registryLoading={registryLoading}
+                registryError={registryError}
+                registryCount={registryCount}
+              />
             )}
             
             {activeDrawer === 'about' && (
